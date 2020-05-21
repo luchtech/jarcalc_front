@@ -10,22 +10,26 @@ import {
 } from "mdbreact";
 import { Link } from "react-router-dom";
 import api from "../../api";
-import axios from "axios";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  //   axios.defaults.baseURL = "http://127.0.0.1:8000";
-  //   axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+  const [email, setEmail] = useState({
+    value: "",
+    valid: true,
+    error: "",
+  });
+  const [password, setPassword] = useState({
+    value: "",
+    valid: true,
+    error: "",
+  });
   const handleChange = (e: any) => {
     let input = e.target as HTMLInputElement;
     switch (input.id) {
       case "email":
-        setEmail(input.value);
+        setEmail({ value: input.value, valid: true, error: "" });
         break;
       case "password":
-        setPassword(input.value);
+        setPassword({ value: input.value, valid: true, error: "" });
         break;
       default:
         break;
@@ -33,25 +37,41 @@ export default function Login() {
   };
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    let login = { email, password };
-    axios.defaults.withCredentials = true;
-    axios
-      .get("http://localhost:8000/sanctum/csrf-cookie")
+    let login = { email: email.value, password: password.value };
+    api
+      .get("/sanctum/csrf-cookie")
       .then((res) => {
-        console.log("@ csrf-cookie");
         console.log(res);
-        axios
-          .post("http://localhost:8000/login", { email, password })
+        api
+          .post("/login", login)
           .then((res) => {
-            setError("")
+            /**
+             * goes here if login succeeds...
+             */
+            console.log("Login Success");
+            setEmail({ value: "", valid: true, error: "" });
+            setPassword({ value: "", valid: true, error: "" });
           })
           .catch((e) => {
-              let error = e.response.data.errors.email[0]
-              if(error) setError(error)
+            let error = e.response.data.errors;
+            if (error) {
+              if (error.email) {
+                setEmail({ ...email, valid: false, error: error.email[0] });
+              }
+              if (error.password) {
+                setPassword({
+                  ...password,
+                  valid: false,
+                  error: error.password[0],
+                });
+              }
+            }
+            console.log("Login Failed");
+            console.log(error);
           });
       })
       .catch((e) => {
-        console.log("error @ csrf-cookie");
+        console.log("CSRF failed...");
       });
   };
 
@@ -65,31 +85,41 @@ export default function Login() {
                 <strong>Login</strong>
               </h1>
             </MDBCardTitle>
-            <form onSubmit={handleSubmit}>
+
+            <form
+              className="needs-validation"
+              onSubmit={handleSubmit}
+              noValidate
+            >
               <MDBInput
-                label="Your email"
+                icon="envelope"
+                value={email.value}
+                label="Email"
                 group
                 outline
                 type="email"
                 id="email"
-                value={email}
                 onChange={handleChange}
-              />
+                className={email.error && "is-invalid"}
+              >
+                <div className="invalid-feedback ml-3 pl-3">{email.error}</div>
+              </MDBInput>
               <MDBInput
-                label="Your password"
+                icon="key"
+                value={password.value}
+                label="Password"
                 group
                 outline
                 type="password"
                 containerClass="mb-0"
                 id="password"
-                value={password}
                 onChange={handleChange}
-              />
-              {error && (
-                <p className="font-small red-text d-flex justify-content-start">
-                  {error}
-                </p>
-              )}
+                className={password.error && "is-invalid"}
+              >
+                <div className="invalid-feedback ml-3 pl-3">
+                  {password.error}
+                </div>
+              </MDBInput>
               <p className="font-small grey-text d-flex justify-content-end">
                 Forgot
                 <Link
