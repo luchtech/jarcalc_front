@@ -9,9 +9,12 @@ import {
   MDBCardTitle,
 } from "mdbreact";
 import { Link } from "react-router-dom";
-import api from "../../api";
+// import api from "../../api";
+import axios from "axios";
 
 export default function Login() {
+  axios.defaults.baseURL = `${process.env.REACT_APP_API_URL}`;
+  axios.defaults.withCredentials = true;
   const [email, setEmail] = useState({
     value: "",
     valid: true,
@@ -38,11 +41,12 @@ export default function Login() {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     let login = { email: email.value, password: password.value };
-    api
+    axios
       .get("/sanctum/csrf-cookie")
       .then((res) => {
         console.log(res.config.headers);
-        api
+        axios.defaults.withCredentials = true;
+        axios
           .post("/login", login)
           .then((res) => {
             /**
