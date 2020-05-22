@@ -41,7 +41,7 @@ export default function Login() {
     api
       .get("/sanctum/csrf-cookie")
       .then((res) => {
-        console.log(res);
+        console.log(res.config.headers);
         api
           .post("/login", login)
           .then((res) => {
@@ -114,7 +114,7 @@ export default function Login() {
                 containerClass="mb-0"
                 id="password"
                 onChange={handleChange}
-                className={password.error && "is-invalid"}
+                error="dasdada"
               >
                 <div className="invalid-feedback ml-3 pl-3">
                   {password.error}
