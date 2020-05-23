@@ -9,12 +9,9 @@ import {
   MDBCardTitle,
 } from "mdbreact";
 import { Link } from "react-router-dom";
-// import api from "../../api";
-import axios from "axios";
+import api from "../../api";
 
 export default function Login() {
-  axios.defaults.baseURL = `${process.env.REACT_APP_API_URL}`;
-  axios.defaults.withCredentials = true;
   const [email, setEmail] = useState({
     value: "",
     valid: true,
@@ -41,18 +38,18 @@ export default function Login() {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     let login = { email: email.value, password: password.value };
-    axios
+    api
       .get("/sanctum/csrf-cookie")
       .then((res) => {
-        console.log(res.config.headers);
-        axios.defaults.withCredentials = true;
-        axios
+        console.log(res);
+        api.defaults.withCredentials = true;
+        api
           .post("/login", login)
           .then((res) => {
             /**
              * goes here if login succeeds...
              */
-            console.log("Login Success");
+            console.log("LOGIN SUCCESSFUL");
             setEmail({ value: "", valid: true, error: "" });
             setPassword({ value: "", valid: true, error: "" });
           })
@@ -70,11 +67,13 @@ export default function Login() {
                 });
               }
             }
-            console.log("Login Failed");
+            //Console
+            console.log("Login failed...");
             console.log(error);
           });
       })
       .catch((e) => {
+        //Console
         console.log("CSRF failed...");
       });
   };
@@ -88,6 +87,7 @@ export default function Login() {
               <h1>
                 <strong>Login</strong>
               </h1>
+              <h5>API: {process.env.REACT_APP_API_URL}</h5>
             </MDBCardTitle>
 
             <form
