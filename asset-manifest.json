@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.js": "/jarcalc_front/static/js/main.9a9b5deb.chunk.js",
+    "main.js.map": "/jarcalc_front/static/js/main.9a9b5deb.chunk.js.map",
+    "runtime-main.js": "/jarcalc_front/static/js/runtime-main.ec43b2ba.js",
+    "runtime-main.js.map": "/jarcalc_front/static/js/runtime-main.ec43b2ba.js.map",
+    "static/css/2.149bdb54.chunk.css": "/jarcalc_front/static/css/2.149bdb54.chunk.css",
+    "static/js/2.cd8ebd2a.chunk.js": "/jarcalc_front/static/js/2.cd8ebd2a.chunk.js",
+    "static/js/2.cd8ebd2a.chunk.js.map": "/jarcalc_front/static/js/2.cd8ebd2a.chunk.js.map",
+    "index.html": "/jarcalc_front/index.html",
+    "precache-manifest.a694cf471c0625ecdb56194147150aad.js": "/jarcalc_front/precache-manifest.a694cf471c0625ecdb56194147150aad.js",
+    "service-worker.js": "/jarcalc_front/service-worker.js",
+    "static/css/2.149bdb54.chunk.css.map": "/jarcalc_front/static/css/2.149bdb54.chunk.css.map",
+    "static/js/2.cd8ebd2a.chunk.js.LICENSE.txt": "/jarcalc_front/static/js/2.cd8ebd2a.chunk.js.LICENSE.txt",
+    "static/media/JAR.png": "/jarcalc_front/static/media/JAR.e101c42e.png",
+    "static/media/mdb.css": "/jarcalc_front/static/media/default-skin.b257fa9c.svg",
+    "static/media/all.min.css": "/jarcalc_front/static/media/fa-solid-900.ff4da5ed.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ec43b2ba.js",
+    "static/css/2.149bdb54.chunk.css",
+    "static/js/2.cd8ebd2a.chunk.js",
+    "static/js/main.9a9b5deb.chunk.js"
+  ]
+}
