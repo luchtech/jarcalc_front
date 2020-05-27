@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { MDBRow, MDBCol, MDBBtn } from "mdbreact";
-import api from "../../api";
+import api from "../contexts/api";
 
 export default function About() {
   const [user, setUser] = useState({first_name: ""});

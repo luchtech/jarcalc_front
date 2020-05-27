@@ -9,7 +9,7 @@ import {
   MDBCardTitle,
 } from "mdbreact";
 import { Link } from "react-router-dom";
-import api from "../../api";
+import api from "../contexts/api";
 
 export default function Login() {
   const [email, setEmail] = useState({
