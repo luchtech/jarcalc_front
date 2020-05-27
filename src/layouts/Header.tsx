@@ -9,6 +9,7 @@ import {
   MDBLink,
   MDBIcon,
 } from "mdbreact";
+import logo from "../images/JAR.png"
 
 export default function Header() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -24,7 +25,7 @@ export default function Header() {
   return (
     <MDBNavbar color="info-color" dark expand="md" fixed="top" scrolling>
       <MDBNavbarBrand>
-        <strong className="white-text">MDBNavbar</strong>
+        <img src={logo} height="30" alt="not found" />
       </MDBNavbarBrand>
       <MDBNavbarToggler onClick={toggleCollapse} />
       <MDBCollapse isOpen={isCollapsed} navbar>
